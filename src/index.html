@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HardPaper</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- MENU BAR -->
+  <div id="menubar">
+    <div class="menu-left">
+      <span class="app-title">⬡ HardPaper</span>
+      <div class="menu-items">
+
+        <div class="menu-item" id="menu-file">
+          <span>File</span>
+          <div class="dropdown">
+            <div class="dd-item" id="dd-new-text-file">New Text File <span class="dd-shortcut">Ctrl+N</span></div>
+            <div class="dd-item" id="dd-new-file">New File</div>
+            <div class="dd-item" id="dd-new-folder">New Folder</div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-open-file">Open File <span class="dd-shortcut">Ctrl+O</span></div>
+            <div class="dd-item" id="dd-open-folder">Open Folder</div>
+            <div class="dd-item" id="dd-upload-project">Upload Project</div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-save">Save <span class="dd-shortcut">Ctrl+S</span></div>
+            <div class="dd-item" id="dd-save-as">Save As <span class="dd-shortcut">Ctrl+Shift+S</span></div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-close">Close Window</div>
+          </div>
+        </div>
+
+        <div class="menu-item" id="menu-edit">
+          <span>Edit</span>
+          <div class="dropdown">
+            <div class="dd-item" id="dd-undo">Undo <span class="dd-shortcut">Ctrl+Z</span></div>
+            <div class="dd-item" id="dd-redo">Redo <span class="dd-shortcut">Ctrl+Y</span></div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-find">Find <span class="dd-shortcut">Ctrl+F</span></div>
+            <div class="dd-item" id="dd-replace">Replace <span class="dd-shortcut">Ctrl+H</span></div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-format">Format Document <span class="dd-shortcut">Shift+Alt+F</span></div>
+          </div>
+        </div>
+
+        <div class="menu-item" id="menu-view">
+          <span>View</span>
+          <div class="dropdown">
+            <div class="dd-item" id="dd-toggle-theme">Toggle Light/Dark Mode</div>
+            <div class="dd-item" id="dd-toggle-explorer">Toggle Explorer</div>
+            <div class="dd-item" id="dd-toggle-preview">Toggle Live Preview</div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-zoom-in">Zoom In <span class="dd-shortcut">Ctrl++</span></div>
+            <div class="dd-item" id="dd-zoom-out">Zoom Out <span class="dd-shortcut">Ctrl+-</span></div>
+          </div>
+        </div>
+
+        <div class="menu-item" id="menu-run">
+          <span>Run</span>
+          <div class="dropdown">
+            <div class="dd-item" id="dd-start-preview">▶ Start Live Preview</div>
+            <div class="dd-item" id="dd-stop-preview">■ Stop Live Preview</div>
+            <div class="dd-divider"></div>
+            <div class="dd-item" id="dd-generate-research">✦ Generate Research Package</div>
+            <div class="dd-item" id="dd-generate-web-preview">🌐 Generate Web Preview</div>
+          </div>
+        </div>
+
+        <div class="menu-item" id="menu-help">
+          <span>Help</span>
+          <div class="dropdown">
+            <div class="dd-item" id="dd-shortcuts">Keyboard Shortcuts</div>
+            <div class="dd-item" id="dd-about">About HardPaper</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="menu-right">
+      <button class="win-btn" id="btn-minimize">&#8722;</button>
+      <button class="win-btn" id="btn-maximize">&#9633;</button>
+      <button class="win-btn close" id="btn-close">&#10005;</button>
+    </div>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div id="body">
+
+    <!-- ACTIVITY BAR -->
+    <div id="activity-bar">
+      <button class="activity-btn active" id="act-explorer" title="Explorer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7V17a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+      </button>
+      <button class="activity-btn" id="act-search" title="Search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+      <button class="activity-btn" id="act-git" title="Source Control">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 9v1a2 2 0 002 2h4a2 2 0 012 2v1"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+      </button>
+      <button class="activity-btn" id="act-experiment" title="Experiment Tracker">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </button>
+      <button class="activity-btn" id="act-citations" title="Citation Manager">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      </button>
+      <button class="activity-btn" id="act-preview" title="Live Preview">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      </button>
+      <div style="flex:1"></div>
+      <button class="activity-btn" id="act-settings" title="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </button>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+      <div id="sidebar-header">
+        <span id="sidebar-title">EXPLORER</span>
+        <div class="sidebar-actions">
+          <button class="sidebar-btn" id="btn-new-file" title="New File">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          </button>
+          <button class="sidebar-btn" id="btn-new-folder" title="New Folder">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h9a2 2 0 012 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+          </button>
+          <button class="sidebar-btn" id="btn-open-folder" title="Open Folder">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h9a2 2 0 012 2z"/></svg>
+          </button>
+          <button class="sidebar-btn" id="btn-refresh" title="Refresh">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="project-name-bar" style="display:none;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        <span id="project-name-label">PROJECT</span>
+      </div>
+
+      <div id="file-tree">
+        <div id="empty-explorer">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 7V17a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+          <p>No folder opened</p>
+          <button id="empty-open-btn">Open Folder</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div id="center">
+      <div id="editor-toolbar">
+        <button class="toolbar-btn" id="tb-format" title="Format">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+          Format
+        </button>
+        <button class="toolbar-btn" id="tb-wordwrap" title="Word Wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+          Wrap
+        </button>
+        <div class="toolbar-divider"></div>
+        <button class="toolbar-btn" id="tb-preview" title="Live Preview">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          Preview
+        </button>
+        <div style="flex:1"></div>
+        <span id="toolbar-file-info" style="font-size:11px;color:var(--text3);padding-right:8px;"></span>
+      </div>
+
+      <div id="tabs-bar">
+        <div id="tabs-list"></div>
+      </div>
+
+      <div id="editor-area">
+        <div id="welcome">
+          <div class="welcome-logo">⬡</div>
+          <h1>HardPaper</h1>
+          <p>AI-Powered IDE & Research Paper Generator</p>
+          <div class="welcome-actions">
+            <button id="welcome-open-btn">Open Folder</button>
+            <button id="welcome-new-btn">New File</button>
+            <button id="welcome-upload-btn">Upload Project</button>
+          </div>
+          <div class="welcome-tips">
+            <span>Ctrl+O — Open File</span>
+            <span>Ctrl+S — Save</span>
+            <span>Ctrl+Shift+P — Commands</span>
+          </div>
+        </div>
+        <div id="editor-container"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div id="right-panel">
+
+      <!-- RESEARCH PANEL (always visible, no tabs) -->
+      <div id="rp-research-panel" class="rp-panel">
+        <div class="rp-section" style="flex-shrink:0;">
+          <div class="rp-header"><span>PAPER DETAILS</span></div>
+          <div class="rp-body">
+            <input type="text" id="paper-title" placeholder="Paper title..." class="rp-input"/>
+            <input type="text" id="paper-author" placeholder="Author name..." class="rp-input"/>
+            <select id="paper-template" class="rp-input">
+              <option value="generic">📄 Generic — Standard Academic</option>
+              <option value="ieee">📄 IEEE — Computer Science & Engineering</option>
+              <option value="acm">📄 ACM — Computing Research</option>
+              <option value="springer">📄 Springer — Lecture Notes</option>
+              <option value="elsevier">📄 Elsevier — Journal Submissions</option>
+            </select>
+            <button class="rp-btn accent" id="btn-generate-research">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Generate Research Package
+            </button>
+          </div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div id="research-progress-wrap" style="display:none;padding:10px;border-bottom:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--text2);margin-bottom:6px;" id="progress-label">Initializing...</div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+          </div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="progress-step">Step 0 of 7</div>
+        </div>
+
+        <div class="rp-section" style="flex-shrink:0;">
+          <div class="rp-header"><span>EXPORT</span></div>
+          <div class="rp-body" style="flex-direction:row;gap:6px;flex-wrap:wrap;">
+            <button class="rp-btn export-btn" id="btn-export-pdf">PDF</button>
+            <button class="rp-btn export-btn" id="btn-export-word">Word</button>
+            <button class="rp-btn export-btn" id="btn-export-md">Markdown</button>
+            <button class="rp-btn export-btn" id="btn-web-preview" style="flex:1;min-width:100%;">
+              🌐 Generate Web Preview
+            </button>
+          </div>
+        </div>
+
+        <!-- PDF PREVIEW PANEL -->
+        <div id="pdf-preview-wrap" style="display:none;flex-direction:column;border-bottom:1px solid var(--border);flex-shrink:0;">
+          <div class="rp-header" style="flex-shrink:0;">
+            <span>PDF PREVIEW</span>
+            <button onclick="document.getElementById('pdf-preview-wrap').style.display='none'"
+              style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:16px;line-height:1;">×</button>
+          </div>
+          <iframe id="pdf-preview-iframe" src="" style="width:100%;height:420px;border:none;background:#fff;"></iframe>
+        </div>
+
+        <div class="rp-section grow">
+          <div class="rp-header"><span>RESEARCH OUTPUT</span>
+            <button class="sidebar-btn" id="btn-research-history" title="History">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </button>
+          </div>
+          <div id="research-output">
+            <div class="output-empty">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <p>No paper generated yet</p>
+              <p style="font-size:11px;margin-top:4px;">Fill details above and click Generate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div id="status-bar">
+    <div class="status-left">
+      <span id="status-branch">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg>
+        main
+      </span>
+      <span id="status-preview" style="display:none;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        Preview Running
+      </span>
+    </div>
+    <div class="status-right">
+      <span id="status-lang">Plain Text</span>
+      <span id="status-lines">Ln 1, Col 1</span>
+      <span id="status-encoding">UTF-8</span>
+      <span id="status-file">No file open</span>
+    </div>
+  </div>
+
+  <!-- CONTEXT MENU -->
+  <div id="context-menu">
+    <div class="ctx-item" id="ctx-new-file">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>
+      New File
+    </div>
+    <div class="ctx-item" id="ctx-new-folder">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h9a2 2 0 012 2z"/></svg>
+      New Folder
+    </div>
+    <div class="ctx-item" id="ctx-rename">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Rename
+    </div>
+    <div class="ctx-divider"></div>
+    <div class="ctx-item danger" id="ctx-delete">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+      Delete
+    </div>
+  </div>
+
+  <!-- COMMAND PALETTE -->
+  <div id="command-palette">
+    <div id="cp-inner">
+      <div id="cp-search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="cp-input" placeholder="Type a command..."/>
+      </div>
+      <div id="cp-list"></div>
+    </div>
+  </div>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div id="loading-text">Processing...</div>
+      <div class="loading-sub">This may take a moment</div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

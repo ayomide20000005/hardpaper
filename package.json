@@ -1,0 +1,27 @@
+{
+  "name": "hardpaper",
+  "version": "1.0.0",
+  "description": "AI-powered IDE with research paper generation",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.3",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "archiver": "^7.0.1",
+    "axios": "^1.13.6",
+    "chokidar": "^5.0.0",
+    "dotenv": "^17.3.1",
+    "fs-extra": "^11.3.4",
+    "monaco-editor": "^0.44.0",
+"papaparse": "^5.5.3",
+    "pdf-parse": "^2.4.5",
+    "simple-git": "^3.27.0"
+  }
+}

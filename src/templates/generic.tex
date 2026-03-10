@@ -1,0 +1,75 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{abstract}
+\usepackage{cite}
+\usepackage{setspace}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0.13,0.29,0.53}
+
+\lstset{
+  backgroundcolor=\color{gray!10},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{codeblue},
+  numberstyle=\tiny\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  numbers=left,
+  frame=single,
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{{{TITLE}}}
+\lhead{{{AUTHOR}}}
+\cfoot{\thepage}
+
+\title{\textbf{{{TITLE}}}}
+\author{{{AUTHOR}}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+{{ABSTRACT}}
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\doublespacing
+
+\section{Introduction}
+{{INTRODUCTION}}
+
+\section{System Design}
+{{SYSTEM_DESIGN}}
+
+\section{Implementation}
+{{IMPLEMENTATION}}
+
+\section{Evaluation}
+{{EVALUATION}}
+
+\section{Conclusion}
+This paper has presented a thorough examination of the system described herein. The results validate the proposed approach and demonstrate its practical applicability. Future work will focus on extending the system capabilities and exploring additional use cases.
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
