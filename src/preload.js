@@ -20,6 +20,13 @@ contextBridge.exposeInMainWorld('api', {
 
   // API key
   getApiKey: () => ipcRenderer.invoke('get-api-key'),
+  saveApiKey: (key) => ipcRenderer.invoke('save-api-key', key),
+
+  // PDF compile
+  compilePdf: (projectPath) => ipcRenderer.invoke('compile-pdf', projectPath),
+
+  // Web preview window
+  openPreviewWindow: (previewPath) => ipcRenderer.invoke('open-preview-window', previewPath),
 
   // Default project path
   getDefaultProjectPath: (promptText) => ipcRenderer.invoke('get-default-project-path', promptText),
@@ -58,12 +65,6 @@ contextBridge.exposeInMainWorld('api', {
 
   // Events
   onFolderChanged: (cb) => ipcRenderer.on('folder-changed', cb),
-
-  // PDF compile
-  compilePdf: (projectPath) => ipcRenderer.invoke('compile-pdf', projectPath),
-
-  // Web preview window
-  openPreviewWindow: (previewPath) => ipcRenderer.invoke('open-preview-window', previewPath),
 
   // Window
   windowMinimize: () => ipcRenderer.send('window-minimize'),

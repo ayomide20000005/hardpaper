@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog, protocol } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs-extra');
 const chokidar = require('chokidar');
@@ -6,6 +6,25 @@ const http = require('http');
 const fss = require('fs');
 require('dotenv').config();
 const os = require('os');
+
+function getConfigPath() {
+  return path.join(app.getPath('userData'), 'config.json');
+}
+
+function loadApiKey() {
+  try {
+    const config = fs.readJsonSync(getConfigPath());
+    return config.geminiApiKey || process.env.GEMINI_API_KEY || null;
+  } catch (e) {
+    return process.env.GEMINI_API_KEY || null;
+  }
+}
+
+function saveApiKey(key) {
+  const configPath = getConfigPath();
+  fs.ensureFileSync(configPath);
+  fs.writeJsonSync(configPath, { geminiApiKey: key }, { spaces: 2 });
+}
 
 let mainWindow;
 let watcher;
@@ -135,12 +154,13 @@ ipcMain.handle('get-git-status', async (event, projectPath) => {
 });
 
 // ── API KEY ───────────────────────────────────────────────────────
-ipcMain.handle('get-api-key', () => process.env.GEMINI_API_KEY || null);
+ipcMain.handle('get-api-key', () => loadApiKey());
+ipcMain.handle('save-api-key', (event, key) => { saveApiKey(key); return true; });
 
 // ── AI — SECTION EDIT ────────────────────────────────────────────
 ipcMain.handle('ai-edit-section', async (event, section, content, instruction) => {
   const { editResearchSection } = require('./claude');
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = loadApiKey();
   if (!apiKey) throw new Error('No Gemini API key found in .env file');
   return await editResearchSection(section, content, instruction, apiKey);
 });
@@ -148,7 +168,7 @@ ipcMain.handle('ai-edit-section', async (event, section, content, instruction) =
 // ── RESEARCH GENERATION ───────────────────────────────────────────
 ipcMain.handle('generate-research', async (event, projectPath, title, author, template) => {
   const { generateResearch } = require('./claude');
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = loadApiKey();
   if (!apiKey) throw new Error('No Gemini API key found in .env file');
 
   const steps = [
@@ -171,7 +191,7 @@ ipcMain.handle('generate-research', async (event, projectPath, title, author, te
 // ── RESEARCH WEB PREVIEW ──────────────────────────────────────────
 ipcMain.handle('generate-web-preview', async (event, projectPath, researchData) => {
   const { generateWebPreview } = require('./researchPreview');
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = loadApiKey();
   if (!apiKey) throw new Error('No Gemini API key found in .env file');
   return await generateWebPreview(projectPath, researchData, apiKey);
 });

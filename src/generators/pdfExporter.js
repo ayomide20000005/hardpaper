@@ -19,20 +19,23 @@ async function exportToPDF(projectPath) {
   const texContent = await fs.readFile(texPath, 'utf-8');
 
   return new Promise((resolve, reject) => {
-    const postData = 'text=' + encodeURIComponent(texContent);
+    const postData = JSON.stringify({
+      compiler: 'pdflatex',
+      resources: [{ main: true, content: texContent }],
+    });
 
     const options = {
-      hostname: 'latexonline.cc',
-      path: '/compile',
+      hostname: 'latex.ytotech.com',
+      path: '/builds/sync',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(postData),
       },
     };
 
     const req = https.request(options, (res) => {
-      if (res.statusCode !== 200) {
+      if (res.statusCode !== 200 && res.statusCode !== 201) {
         reject(new Error(`LaTeX compile failed: HTTP ${res.statusCode}`));
         return;
       }

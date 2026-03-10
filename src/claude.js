@@ -219,7 +219,15 @@ function extractSections(latex) {
     const regex = new RegExp(`\\\\section\\{${name}\\}([\\s\\S]*?)(?=\\\\section|\\\\end\\{document\\}|$)`, 'i');
     const match = latex.match(regex);
     if (match) {
-      sections[name] = match[1].replace(/\\[a-zA-Z]+\{([^}]*)\}/g, '$1').replace(/\\[a-zA-Z]+/g, '').replace(/[{}]/g, '').trim().substring(0, 400) + '...';
+      sections[name] = match[1]
+        .replace(/\\definecolor\{[^}]*\}\{[^}]*\}\{[^}]*\}/g, '')
+        .replace(/\\lstset\{[\s\S]*?\}/g, '')
+        .replace(/\\lstdefinestyle\{[\s\S]*?\}/g, '')
+        .replace(/\\[a-zA-Z]+\{([^}]*)\}/g, '$1')
+        .replace(/\\[a-zA-Z]+/g, '')
+        .replace(/[{}]/g, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim().substring(0, 400) + '...';
     } else {
       sections[name] = 'Generated successfully.';
     }

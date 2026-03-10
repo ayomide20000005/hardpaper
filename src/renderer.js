@@ -21,8 +21,59 @@ let lastResearchData = null;
 window.api.getApiKey().then(key => {
   hasApiKey = !!key;
   hasGeminiKey = !!key;
-  if (!hasApiKey) toast('No Gemini API key in .env — AI features disabled', 'error');
 });
+
+function promptApiKey(onSuccess) {
+  const existing = document.getElementById('api-key-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'api-key-modal';
+  modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.75);
+    display:flex;align-items:center;justify-content:center;z-index:9999999;backdrop-filter:blur(4px);`;
+
+  modal.innerHTML = `
+    <div style="background:var(--bg3);border:1px solid var(--glass-border);border-radius:12px;
+      padding:32px;width:440px;box-shadow:0 16px 48px rgba(0,0,0,0.7);">
+      <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">
+        ⬡ Enter Gemini API Key
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:20px;line-height:1.6;">
+        Get your free API key from 
+        <a href="https://aistudio.google.com" target="_blank" 
+          style="color:var(--accent);">aistudio.google.com</a>.<br>
+        Your key is saved locally on your machine only.
+      </div>
+      <input id="api-key-input" type="password" placeholder="Paste your Gemini API key..."
+        style="width:100%;padding:10px;background:var(--bg4);border:1px solid var(--border);
+        border-radius:6px;color:var(--text);font-size:13px;outline:none;margin-bottom:16px;"/>
+      <div style="display:flex;gap:10px;">
+        <button id="api-key-save" style="flex:1;padding:10px;background:linear-gradient(135deg,var(--accent),var(--accent-hover));
+          color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500;">
+          Save & Continue
+        </button>
+        <button id="api-key-cancel" style="padding:10px 20px;background:var(--bg4);
+          color:var(--text2);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;">
+          Cancel
+        </button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(modal);
+
+  document.getElementById('api-key-save').addEventListener('click', async () => {
+    const key = document.getElementById('api-key-input').value.trim();
+    if (!key) return toast('Please enter your API key', 'error');
+    await window.api.saveApiKey(key);
+    hasApiKey = true;
+    hasGeminiKey = true;
+    modal.remove();
+    toast('API key saved!', 'success');
+    if (onSuccess) onSuccess();
+  });
+
+  document.getElementById('api-key-cancel').addEventListener('click', () => modal.remove());
+}
 
 // ── RESEARCH PROGRESS ─────────────────────────────────────────────
 window.api.onResearchProgress(({ step, total, label }) => {
@@ -793,7 +844,7 @@ document.getElementById('ctx-delete').addEventListener('click', async () => {
 // ── GENERATE RESEARCH ────────────────────────────────────────────
 async function generateResearch() {
   if (!currentProjectPath) return toast('Open a project folder first', 'error');
-  if (!hasGeminiKey) return toast('Add Gemini API key to .env first', 'error');
+  if (!hasGeminiKey) return promptApiKey(() => generateResearch());
 
   const title = document.getElementById('paper-title').value.trim() || 'Research Paper';
   const author = document.getElementById('paper-author').value.trim() || 'Author';
@@ -867,7 +918,7 @@ window.toggleSection = function(el) {
 };
 
 window.editSection = async function(sectionName) {
-  if (!hasGeminiKey) return toast('Add Gemini API key to .env first', 'error');
+  if (!hasGeminiKey) return promptApiKey(() => window.editSection(sectionName));
   const instruction = prompt(`How do you want to edit the ${sectionName} section?`);
   if (!instruction) return;
 
@@ -892,7 +943,7 @@ window.editSection = async function(sectionName) {
 // ── GENERATE WEB PREVIEW ─────────────────────────────────────────
 async function generateWebPreview() {
   if (!currentProjectPath) return toast('Open a project first', 'error');
-  if (!hasGeminiKey) return toast('Add Gemini API key to .env first', 'error');
+  if (!hasGeminiKey) return promptApiKey(() => generateWebPreview());
   if (!lastResearchData) return toast('Generate a research paper first', 'error');
 
   showLoading('AI is building your research website...');
@@ -932,6 +983,7 @@ document.getElementById('btn-research-history').addEventListener('click', async 
 // ── EXPORT ───────────────────────────────────────────────────────
 document.getElementById('btn-export-pdf').addEventListener('click', async () => {
   if (!currentProjectPath) return toast('Open a project first', 'error');
+  if (!hasGeminiKey) return promptApiKey(() => document.getElementById('btn-export-pdf').click());
   showLoading('Compiling PDF via latexonline.cc...');
   try {
     const result = await window.api.compilePdf(currentProjectPath);
