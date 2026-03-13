@@ -2,6 +2,7 @@
   "name": "hardpaper",
   "version": "1.0.0",
   "description": "AI-powered IDE with research paper generation",
+  "author": "Shuaib Alameen",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -17,6 +18,7 @@
     "files": [
       "src/**/*",
       "node_modules/**/*",
+      "build/**/*",
       "package.json"
     ]
   },
