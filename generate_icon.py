@@ -32,13 +32,15 @@ def draw_hardpaper_icon(size):
     
     return img
 
-sizes = [16, 32, 48, 256]
-images = [draw_hardpaper_icon(s) for s in sizes]
+img256 = draw_hardpaper_icon(256)
+img48 = draw_hardpaper_icon(48)
+img32 = draw_hardpaper_icon(32)
+img16 = draw_hardpaper_icon(16)
 
-images[0].save(
+img256.save(
     'build/icon.ico',
     format='ICO',
-    sizes=[(s, s) for s in sizes],
-    append_images=images[1:]
+    sizes=[(256,256),(48,48),(32,32),(16,16)],
+    append_images=[img48, img32, img16]
 )
 print("Icon generated at build/icon.ico")

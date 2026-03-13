@@ -16,6 +16,7 @@
     },
     "files": [
       "src/**/*",
+      "node_modules/**/*",
       "package.json"
     ]
   },
@@ -32,7 +33,7 @@
     "dotenv": "^17.3.1",
     "fs-extra": "^11.3.4",
     "monaco-editor": "^0.44.0",
-"papaparse": "^5.5.3",
+    "papaparse": "^5.5.3",
     "pdf-parse": "^2.4.5",
     "simple-git": "^3.27.0"
   }
