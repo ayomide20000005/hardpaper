@@ -1,1 +1,2 @@
 HardPaper is an AI-powered research IDE built with Electron that lets you open any code project, analyze its structure, and automatically generate a full academic research paper in LaTeX supporting IEEE, ACM, Springer, Elsevier, and Generic templates. It comes with a Monaco-based code editor, citation manager with DOI validation, experiment tracker, PDF export, web preview, and a live preview server to view the research detials in a web format
+![folder open](https://github.com/user-attachments/assets/cfb1d856-022e-4d0e-910f-16112c6d930d)
